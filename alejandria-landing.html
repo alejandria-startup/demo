@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlejandrIA — Evidencia auditable de que tu gente aprendió</title>
+<meta name="description" content="AlejandrIA es el SaaS con IA que convierte cada capacitación en evidencia auditable de transferencia al puesto, para minería y operaciones industriales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ============ TOKENS ============ */
+:root{
+  --black:#0a0a0b;
+  --panel:#131215;
+  --panel-2:#1a181b;
+  --gold:#c7a15a;
+  --gold-bright:#e6c983;
+  --copper:#a9603a;
+  --copper-bright:#c97a4f;
+  --ivory:#ece6d8;
+  --stone:#8b8578;
+  --hairline:rgba(199,161,90,0.16);
+  --hairline-strong:rgba(199,161,90,0.32);
+
+  --serif:"Fraunces", Georgia, serif;
+  --sans:"IBM Plex Sans", -apple-system, sans-serif;
+  --mono:"IBM Plex Mono", "SF Mono", monospace;
+
+  --maxw:1120px;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(ellipse 900px 500px at 85% -10%, rgba(199,161,90,0.08), transparent 60%),
+    radial-gradient(ellipse 700px 500px at -10% 30%, rgba(169,96,58,0.07), transparent 60%),
+    var(--black);
+  color:var(--ivory);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+img,svg{display:block; max-width:100%;}
+a{color:inherit; text-decoration:none;}
+button{font-family:inherit;}
+
+::selection{background:var(--copper); color:var(--black);}
+
+:focus-visible{
+  outline:2px solid var(--gold-bright);
+  outline-offset:3px;
+  border-radius:2px;
+}
+
+.wrap{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:0 32px;
+}
+
+.eyebrow{
+  font-family:var(--mono);
+  font-size:11.5px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--gold);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:0 0 18px;
+}
+.eyebrow::before{
+  content:"";
+  width:22px; height:1px;
+  background:var(--copper-bright);
+  display:inline-block;
+}
+
+h1,h2,h3{
+  font-family:var(--serif);
+  font-weight:500;
+  letter-spacing:-0.01em;
+  margin:0;
+  color:var(--ivory);
+}
+h2{font-size:clamp(28px,4vw,42px); line-height:1.15;}
+h3{font-size:19px; font-weight:500;}
+
+p{color:var(--stone); margin:0;}
+.lede{font-size:17px; line-height:1.7; max-width:640px;}
+
+em{
+  font-style:italic;
+  color:var(--gold-bright);
+}
+
+.section{
+  padding:96px 0;
+  border-top:1px solid var(--hairline);
+  position:relative;
+}
+.section-head{
+  margin-bottom:56px;
+}
+
+/* reveal on scroll */
+.reveal{opacity:0; transform:translateY(18px); transition:opacity 0.7s ease, transform 0.7s ease;}
+.reveal.in{opacity:1; transform:translateY(0);}
+
+/* ============ NAV ============ */
+header.site{
+  position:fixed; top:0; left:0; right:0;
+  z-index:100;
+  background:rgba(10,10,11,0.82);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--hairline);
+}
+.nav{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:18px 32px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.brand{
+  display:flex; align-items:center; gap:12px;
+  font-family:var(--serif);
+  font-size:19px;
+  letter-spacing:0.02em;
+  color:var(--ivory);
+}
+.brand-mark{width:30px; height:30px; flex:none;}
+.brand small{
+  display:block;
+  font-family:var(--mono);
+  font-size:9px;
+  letter-spacing:0.16em;
+  color:var(--stone);
+  text-transform:uppercase;
+  margin-top:1px;
+}
+
+.nav-links{
+  display:flex; gap:34px;
+  font-family:var(--mono);
+  font-size:12.5px;
+  letter-spacing:0.03em;
+}
+.nav-links a{
+  color:var(--stone);
+  position:relative;
+  padding:4px 0;
+  transition:color 0.25s ease;
+}
+.nav-links a:hover, .nav-links a.active{color:var(--gold-bright);}
+.nav-links a.active::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-6px;
+  height:1px; background:var(--gold);
+}
+
+.btn{
+  font-family:var(--mono);
+  font-size:12.5px;
+  letter-spacing:0.03em;
+  padding:11px 20px;
+  border-radius:2px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+  transition:all 0.25s ease;
+  white-space:nowrap;
+}
+.btn-primary{
+  background:var(--gold);
+  color:var(--black);
+  border:1px solid var(--gold);
+}
+.btn-primary:hover{background:var(--gold-bright); border-color:var(--gold-bright);}
+.btn-ghost{
+  background:transparent;
+  color:var(--ivory);
+  border:1px solid var(--hairline-strong);
+}
+.btn-ghost:hover{border-color:var(--gold); color:var(--gold-bright);}
+
+.nav-cta{display:flex; align-items:center; gap:18px;}
+.nav-toggle{display:none; background:none; border:none; color:var(--ivory); cursor:pointer;}
+
+@media (max-width:880px){
+  .nav-links{
+    position:fixed; inset:0; top:0;
+    background:var(--black);
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:28px;
+    font-size:16px;
+    transform:translateY(-100%);
+    transition:transform 0.35s ease;
+  }
+  .nav-links.open{transform:translateY(0);}
+  .nav-cta .btn-primary{display:none;}
+  .nav-toggle{display:block;}
+}
+
+/* ============ HERO ============ */
+.hero{
+  padding:180px 0 110px;
+  position:relative;
+  overflow:hidden;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.15fr 0.85fr;
+  gap:60px;
+  align-items:center;
+}
+.hero h1{
+  font-size:clamp(38px, 5.6vw, 66px);
+  line-height:1.06;
+  margin-bottom:26px;
+}
+.hero .lede{margin-bottom:36px; font-size:18px;}
+.hero-ctas{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:30px;}
+.hero-trust{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--stone);
+  letter-spacing:0.02em;
+  border-top:1px solid var(--hairline);
+  padding-top:18px;
+  max-width:460px;
+}
+
+.seal-wrap{
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+}
+.seal{
+  animation:seal-fade 1.4s ease both;
+}
+@keyframes seal-fade{
+  from{opacity:0; transform:scale(0.92) rotate(-4deg);}
+  to{opacity:1; transform:scale(1) rotate(0deg);}
+}
+.seal-ring-outer{
+  animation:spin-slow 60s linear infinite;
+  transform-origin:110px 110px;
+}
+@keyframes spin-slow{ to{ transform:rotate(360deg); } }
+.seal-caption{
+  text-align:center;
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:0.16em;
+  color:var(--stone);
+  text-transform:uppercase;
+  margin-top:16px;
+}
+
+@media (max-width:880px){
+  .hero-grid{grid-template-columns:1fr; gap:48px;}
+  .hero{padding:150px 0 70px;}
+  .seal-wrap{order:-1;}
+  .seal{width:150px; height:150px;}
+}
+
+/* ============ STATS BAR ============ */
+.stats-bar{
+  border-top:1px solid var(--hairline);
+  border-bottom:1px solid var(--hairline);
+  padding:52px 0;
+}
+.stats-note{
+  font-family:var(--mono);
+  font-size:11.5px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--stone);
+  margin-bottom:36px;
+}
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:40px;
+}
+.stat-num{
+  font-family:var(--mono);
+  font-size:clamp(38px, 5vw, 54px);
+  color:var(--gold-bright);
+  line-height:1;
+  margin-bottom:12px;
+}
+.stat-label{font-size:14.5px; color:var(--stone); max-width:250px;}
+@media (max-width:720px){
+  .stats-grid{grid-template-columns:1fr; gap:32px;}
+}
+
+/* ============ SOLUCION ============ */
+.solucion-body{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;}
+.value-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:22px;}
+.value-list li{
+  display:flex; gap:16px;
+  padding-bottom:22px;
+  border-bottom:1px solid var(--hairline);
+  font-size:15px;
+  color:var(--ivory);
+}
+.value-list li:last-child{border-bottom:none; padding-bottom:0;}
+.value-list .num{
+  font-family:var(--mono);
+  color:var(--copper-bright);
+  font-size:13px;
+  flex:none;
+  padding-top:2px;
+}
+@media (max-width:880px){
+  .solucion-body{grid-template-columns:1fr; gap:36px;}
+}
+
+/* ============ COMO FUNCIONA — rail ============ */
+.rail{
+  border-left:1px solid var(--hairline-strong);
+  margin-left:6px;
+  padding-left:44px;
+  display:flex;
+  flex-direction:column;
+  gap:52px;
+}
+.rail-step{position:relative;}
+.rail-step::before{
+  content:"";
+  position:absolute;
+  left:-50px; top:4px;
+  width:10px; height:10px;
+  border-radius:50%;
+  background:var(--black);
+  border:2px solid var(--gold);
+}
+.rail-tag{
+  font-family:var(--mono);
+  font-size:11.5px;
+  color:var(--copper-bright);
+  letter-spacing:0.12em;
+  display:block;
+  margin-bottom:8px;
+}
+.rail-step h3{margin-bottom:10px;}
+.rail-step p{max-width:560px; font-size:15px;}
+
+/* ============ PLATAFORMA ============ */
+.feat-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:1px;
+  background:var(--hairline);
+  border:1px solid var(--hairline);
+}
+.feat-card{
+  background:var(--black);
+  padding:34px;
+}
+.feat-card h3{font-size:16.5px; margin-bottom:10px; color:var(--gold-bright);}
+.feat-card p{font-size:14.5px;}
+@media (max-width:720px){
+  .feat-grid{grid-template-columns:1fr;}
+}
+
+/* ============ RESULTADOS ============ */
+.res-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;}
+.bar-block{margin-bottom:30px;}
+.bar-block:last-child{margin-bottom:0;}
+.bar-label{
+  display:flex; justify-content:space-between;
+  font-family:var(--mono);
+  font-size:12.5px;
+  color:var(--stone);
+  margin-bottom:8px;
+}
+.bar-track{
+  height:8px;
+  background:var(--panel-2);
+  border-radius:1px;
+  overflow:hidden;
+  position:relative;
+}
+.bar-fill{
+  height:100%;
+  border-radius:1px;
+  width:0;
+  transition:width 1.4s cubic-bezier(.2,.8,.2,1);
+}
+.bar-fill.before{background:var(--copper);}
+.bar-fill.after{background:var(--gold);}
+.bar-track.in .bar-fill.before{width:var(--w-before);}
+.bar-track.in .bar-fill.after{width:var(--w-after);}
+
+.res-numbers{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:28px;
+}
+.res-num{
+  border-top:1px solid var(--hairline);
+  padding-top:16px;
+}
+.res-num .stat-num{font-size:30px; margin-bottom:6px;}
+.res-num .stat-label{font-size:13px;}
+.res-note{
+  font-size:13px;
+  color:var(--stone);
+  margin-top:30px;
+  max-width:520px;
+  border-top:1px solid var(--hairline);
+  padding-top:20px;
+}
+@media (max-width:880px){
+  .res-grid{grid-template-columns:1fr; gap:44px;}
+}
+
+/* ============ PARA QUIEN ============ */
+.audience-grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:1px;
+  background:var(--hairline);
+  border:1px solid var(--hairline);
+}
+.audience-card{
+  background:var(--black);
+  padding:30px 26px;
+  display:flex; flex-direction:column; gap:16px;
+}
+.audience-role{
+  font-family:var(--mono);
+  font-size:11.5px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--copper-bright);
+}
+.audience-pain{font-size:13.5px; color:var(--stone); font-style:italic;}
+.audience-msg{font-size:14.5px; color:var(--ivory); line-height:1.6;}
+@media (max-width:960px){
+  .audience-grid{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:560px){
+  .audience-grid{grid-template-columns:1fr;}
+}
+
+/* ============ COMPARATIVA ============ */
+.comp-table{width:100%; border-collapse:collapse;}
+.comp-table th, .comp-table td{
+  text-align:left;
+  padding:18px 20px;
+  border-bottom:1px solid var(--hairline);
+  font-size:14.5px;
+  vertical-align:top;
+}
+.comp-table th{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--stone);
+  font-weight:400;
+  padding-bottom:16px;
+}
+.comp-table td:first-child{color:var(--gold-bright); font-family:var(--mono); font-size:12.5px; width:22%;}
+.comp-table td.market{color:var(--stone);}
+.comp-table td.alej{color:var(--ivory);}
+@media (max-width:720px){
+  .comp-table, .comp-table thead, .comp-table tbody, .comp-table th, .comp-table td, .comp-table tr{display:block;}
+  .comp-table thead{display:none;}
+  .comp-table tr{border-bottom:1px solid var(--hairline-strong); padding:18px 0;}
+  .comp-table td{border-bottom:none; padding:6px 0;}
+  .comp-table td.market::before{content:"Mercado actual — "; color:var(--stone); font-family:var(--mono); font-size:11px;}
+  .comp-table td.alej::before{content:"AlejandrIA — "; color:var(--gold); font-family:var(--mono); font-size:11px;}
+}
+
+/* ============ EQUIPO ============ */
+.team-grid{display:grid; grid-template-columns:1fr 1fr; gap:52px;}
+.team-card{border-top:1px solid var(--hairline-strong); padding-top:26px;}
+.team-name{font-family:var(--serif); font-style:italic; font-size:23px; color:var(--ivory); margin-bottom:6px;}
+.team-role{
+  font-family:var(--mono);
+  font-size:11.5px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--copper-bright);
+  margin-bottom:16px;
+}
+.team-bio{font-size:14.5px; line-height:1.7;}
+.affil{
+  margin-top:56px;
+  padding-top:28px;
+  border-top:1px solid var(--hairline);
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:0.04em;
+  color:var(--stone);
+}
+.affil span{color:var(--gold);}
+@media (max-width:720px){
+  .team-grid{grid-template-columns:1fr; gap:40px;}
+}
+
+/* ============ MODELO ============ */
+.model-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--hairline); border:1px solid var(--hairline);}
+.model-card{background:var(--black); padding:40px;}
+.model-card.highlight{background:var(--panel);}
+.model-tag{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--stone); margin-bottom:14px;
+}
+.model-card h3{font-size:22px; margin-bottom:16px;}
+.model-list{list-style:none; margin:0 0 30px; padding:0; display:flex; flex-direction:column; gap:10px;}
+.model-list li{
+  font-size:14px; color:var(--stone);
+  padding-left:18px; position:relative;
+}
+.model-list li::before{
+  content:"—"; position:absolute; left:0; color:var(--copper-bright);
+}
+@media (max-width:720px){
+  .model-grid{grid-template-columns:1fr;}
+}
+
+/* ============ CTA FINAL ============ */
+.final-cta{
+  text-align:center;
+  padding:120px 0 100px;
+}
+.final-cta h2{max-width:760px; margin:0 auto 20px; font-size:clamp(30px,4.6vw,48px);}
+.final-cta .lede{max-width:520px; margin:0 auto 40px;}
+.final-cta .hero-ctas{justify-content:center;}
+
+/* ============ FOOTER ============ */
+footer{
+  border-top:1px solid var(--hairline);
+  padding:44px 0;
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--stone);
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:16px;
+}
+footer a{color:var(--gold); border-bottom:1px solid transparent;}
+footer a:hover{border-color:var(--gold);}
+
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" stroke="#c7a15a" stroke-width="1"/>
+        <circle cx="20" cy="20" r="14" stroke="#a9603a" stroke-width="1" stroke-dasharray="1.5 3.5"/>
+        <text x="20" y="26" text-anchor="middle" font-family="Fraunces, serif" font-size="17" fill="#ece6d8">A</text>
+      </svg>
+      <div>ALEJANDRÍA<small>Transferencia que previene</small></div>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="#problema">Problema</a>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#resultados">Resultados</a>
+      <a href="#para-quien">Para quién</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#contacto" class="btn btn-primary">Agendar diagnóstico</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">SaaS + IA para minería y operaciones industriales</p>
+        <h1>La prueba de que tu gente aprendió — no la promesa.</h1>
+        <p class="lede">AlejandrIA convierte cada capacitación de seguridad en evidencia auditable: registra si el conocimiento llegó al puesto de trabajo, no solo si alguien firmó una lista de asistencia.</p>
+        <div class="hero-ctas">
+          <a href="#contacto" class="btn btn-primary">Agendar diagnóstico sin costo</a>
+          <a href="#como-funciona" class="btn btn-ghost">Ver cómo funciona</a>
+        </div>
+        <p class="hero-trust">Pensado para faenas y operaciones con más de 50 trabajadores y presupuesto de capacitación activo — donde RRHH, Prevención de Riesgos y Gerencia responden por cada accidente.</p>
+      </div>
+      <div class="seal-wrap">
+        <div>
+          <svg class="seal" width="220" height="220" viewBox="0 0 220 220">
+            <g class="seal-ring-outer">
+              <circle cx="110" cy="110" r="104" fill="none" stroke="#c7a15a" stroke-width="1" stroke-dasharray="1 7"/>
+            </g>
+            <circle cx="110" cy="110" r="86" fill="none" stroke="#3a3530" stroke-width="1"/>
+            <circle cx="110" cy="110" r="68" fill="none" stroke="#a9603a" stroke-width="1"/>
+            <text x="110" y="100" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="3" fill="#8b8578">REGISTRO</text>
+            <text x="110" y="128" text-anchor="middle" font-family="Fraunces, serif" font-size="40" fill="#ece6d8">A</text>
+            <text x="110" y="150" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="2" fill="#8b8578">N.º 001</text>
+          </svg>
+          <p class="seal-caption">Evidencia verificada en terreno</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATS BAR ============ -->
+  <section class="stats-bar">
+    <div class="wrap">
+      <p class="stats-note">Lo que encontramos al hablar con supervisores y APR en terreno</p>
+      <div class="stats-grid">
+        <div class="reveal">
+          <div class="stat-num">80%</div>
+          <p class="stat-label">de los programas de capacitación no tiene un objetivo de cambio de conducta definido.</p>
+        </div>
+        <div class="reveal">
+          <div class="stat-num">100%</div>
+          <p class="stat-label">de los programas evaluados no mide si ese aprendizaje llegó realmente a la tarea.</p>
+        </div>
+        <div class="reveal">
+          <div class="stat-num">~4%</div>
+          <p class="stat-label">del PIB nacional se pierde cada año en costos asociados a accidentabilidad laboral.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROBLEMA / SOLUCION ============ -->
+  <section class="section" id="problema">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Qué es AlejandrIA</p>
+        <h2>No vendemos cursos. Entregamos la evidencia de que una conducta cambió.</h2>
+      </div>
+      <div class="solucion-body">
+        <p class="lede">AlejandrIA no reemplaza a tus instructores ni a tu sistema documental — se instala en la distancia que hoy nadie mide: la que separa el cierre de una capacitación de su aplicación real en el puesto de trabajo. Con inteligencia artificial adaptamos el material a cada perfil de trabajador, observamos la conducta en terreno y dejamos un registro trazable, listo para tu próxima auditoría o fiscalización. El resultado: menos riesgo, mejor conducta y un ROI medido con KPI's claros para gerencia.</p>
+        <ul class="value-list">
+          <li><span class="num">01</span><span>Diagnóstico basado en los riesgos críticos y el perfil real de tu dotación — no en supuestos.</span></li>
+          <li><span class="num">02</span><span>Material adaptado a la escolaridad y al estilo de aprendizaje de cada equipo.</span></li>
+          <li><span class="num">03</span><span>Observación de conducta en terreno, con evidencia firmada y trazable en el tiempo.</span></li>
+          <li><span class="num">04</span><span>ROI medido con KPI's — evidencia de reducción de riesgo, no promesas.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMO FUNCIONA ============ -->
+  <section class="section" id="como-funciona">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Cómo funciona</p>
+        <h2>Cuatro registros, un mismo hilo de trazabilidad.</h2>
+      </div>
+      <div class="rail">
+        <div class="rail-step reveal">
+          <span class="rail-tag">R-01 · Diagnóstico</span>
+          <h3>Diagnóstico de brechas</h3>
+          <p>Revisamos incidentes, riesgos críticos y el perfil educativo real de tu dotación antes de diseñar nada. Sin esto, cualquier programa es una apuesta.</p>
+        </div>
+        <div class="rail-step reveal">
+          <span class="rail-tag">R-02 · Diseño</span>
+          <h3>Material adaptado</h3>
+          <p>La plataforma ajusta cada guía, video o pauta al formato y nivel que necesita cada perfil de trabajador, incluida la baja escolaridad.</p>
+        </div>
+        <div class="rail-step reveal">
+          <span class="rail-tag">R-03 · Formación</span>
+          <h3>Facilitadores internos</h3>
+          <p>Preparamos a tus propios supervisores y jefes de turno para que multipliquen el conocimiento, con una guía paso a paso que elimina la improvisación.</p>
+        </div>
+        <div class="rail-step reveal">
+          <span class="rail-tag">R-04 · Evidencia</span>
+          <h3>Medición en terreno</h3>
+          <p>Observamos la conducta real en el puesto de trabajo, no solo la comprensión en sala, y dejamos evidencia firmada de cada ciclo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PLATAFORMA ============ -->
+  <section class="section" id="plataforma">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">La plataforma</p>
+        <h2>Todo el ciclo, visible en un solo tablero.</h2>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="feat-grid reveal">
+        <div class="feat-card">
+          <h3>Adaptación con IA</h3>
+          <p>Cada guía, video o pauta se ajusta automáticamente al perfil y nivel del trabajador que la recibe.</p>
+        </div>
+        <div class="feat-card">
+          <h3>Tablero en tiempo real</h3>
+          <p>Aprobación, comprensión, transferencia al puesto y satisfacción — por faena, turno o contratista.</p>
+        </div>
+        <div class="feat-card">
+          <h3>Trazabilidad total</h3>
+          <p>Cada evidencia queda registrada con fecha, responsable y firma, lista para una auditoría o fiscalización.</p>
+        </div>
+        <div class="feat-card">
+          <h3>Alertas tempranas</h3>
+          <p>Identifica antes de que un supervisor no esté transfiriendo el conocimiento a su equipo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESULTADOS ============ -->
+  <section class="section" id="resultados">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">El argumento para finanzas y riesgo</p>
+        <h2>Menos riesgo crítico, medido en dólares.</h2>
+      </div>
+      <div class="res-grid">
+        <div>
+          <div class="bar-block">
+            <div class="bar-label"><span>Riesgos en zona crítica</span><span>12 → 3</span></div>
+            <div class="bar-track reveal" style="--w-before:100%; --w-after:25%;">
+              <div class="bar-fill before"></div>
+            </div>
+            <div class="bar-track reveal" style="--w-before:100%; --w-after:25%; margin-top:6px;">
+              <div class="bar-fill after"></div>
+            </div>
+          </div>
+          <div class="bar-block">
+            <div class="bar-label"><span>Criticidad promedio</span><span>14,1 → 10,7</span></div>
+            <div class="bar-track reveal" style="--w-before:100%; --w-after:76%;">
+              <div class="bar-fill before"></div>
+            </div>
+            <div class="bar-track reveal" style="--w-before:100%; --w-after:76%; margin-top:6px;">
+              <div class="bar-fill after"></div>
+            </div>
+          </div>
+          <p class="res-note">Análisis de 23 riesgos operacionales, legales, financieros, reputacionales y estratégicos, evaluados junto a equipos de faena antes y después de un ciclo de 12 a 24 meses con AlejandrIA.</p>
+        </div>
+        <div class="res-numbers">
+          <div class="res-num">
+            <div class="stat-num">0,85–6,5M</div>
+            <p class="stat-label">USD de pérdida evitada por año, por empresa.</p>
+          </div>
+          <div class="res-num">
+            <div class="stat-num">5×–65×</div>
+            <p class="stat-label">retorno sobre la inversión.</p>
+          </div>
+          <div class="res-num">
+            <div class="stat-num">1–5</div>
+            <p class="stat-label">meses de recuperación de la inversión.</p>
+          </div>
+          <div class="res-num">
+            <div class="stat-num">−24%</div>
+            <p class="stat-label">de reducción en criticidad promedio agregada.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PARA QUIEN ============ -->
+  <section class="section" id="para-quien">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Para quién</p>
+        <h2>Un mismo problema, visto desde cuatro escritorios.</h2>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="audience-grid reveal">
+        <div class="audience-card">
+          <span class="audience-role">RRHH · Capacitación</span>
+          <p class="audience-pain">La capacitación se percibe como un trámite.</p>
+          <p class="audience-msg">Convertimos a tus propios supervisores en multiplicadores de aprendizaje real, no en administradores de asistencia.</p>
+        </div>
+        <div class="audience-card">
+          <span class="audience-role">Operaciones · COO</span>
+          <p class="audience-pain">Accidentes y paradas de planta por errores evitables.</p>
+          <p class="audience-msg">Medimos si el conocimiento llegó al puesto de trabajo, no si alguien estuvo sentado en una sala.</p>
+        </div>
+        <div class="audience-card">
+          <span class="audience-role">Finanzas · CFO</span>
+          <p class="audience-pain">Gasto en capacitación sin retorno visible.</p>
+          <p class="audience-msg">Entre 5 y 65 veces de retorno, con evidencia cuantificada — no promesas.</p>
+        </div>
+        <div class="audience-card">
+          <span class="audience-role">Riesgo · Compliance · SSO</span>
+          <p class="audience-pain">Exposición legal ante un accidente o una fiscalización.</p>
+          <p class="audience-msg">Evidencia trazable de que tu gente aprendió y aplicó, lista para una auditoría o un proceso legal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPARATIVA ============ -->
+  <section class="section" id="comparativa">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Frente al mercado</p>
+        <h2>La diferencia no es el contenido. Es lo que queda registrado después.</h2>
+      </div>
+      <table class="comp-table reveal">
+        <thead>
+          <tr><th>Aspecto</th><th>Mercado actual</th><th>AlejandrIA</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Objetivos</td>
+            <td class="market">Definidos por cada instructor, a criterio propio.</td>
+            <td class="alej">Estandarizados y medibles desde el diseño.</td>
+          </tr>
+          <tr>
+            <td>Evaluación</td>
+            <td class="market">Prueba genérica o solo firma de asistencia.</td>
+            <td class="alej">Observación en terreno + evidencia firmada.</td>
+          </tr>
+          <tr>
+            <td>Material</td>
+            <td class="market">Texto denso, igual para todos.</td>
+            <td class="alej">Adaptado al perfil real de cada trabajador.</td>
+          </tr>
+          <tr>
+            <td>Métricas</td>
+            <td class="market">Solo registro de asistencia.</td>
+            <td class="alej">Aprobación, comprensión, transferencia y satisfacción.</td>
+          </tr>
+          <tr>
+            <td>Mejora continua</td>
+            <td class="market">No existe un ciclo documentado.</td>
+            <td class="alej">Cada ciclo alimenta el siguiente, con trazabilidad completa.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ EQUIPO ============ -->
+  <section class="section" id="equipo">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Quiénes están detrás</p>
+        <h2>Dos miradas sobre una industria que ya no puede aprender a la antigua.</h2>
+      </div>
+      <div class="team-grid">
+        <div class="team-card reveal">
+          <div class="team-name">María Teresa Peñaloza</div>
+          <div class="team-role">Directora Comercial · Experta en minería</div>
+          <p class="team-bio">+15 años de trayectoria en minería, seguridad operacional y gestión de riesgos. Auditora líder ISO 39001.</p>
+        </div>
+        <div class="team-card reveal">
+          <div class="team-name">Karina López Fuentealba</div>
+          <div class="team-role">Directora Académica · Desarrollo humano y formación de personas</div>
+          <p class="team-bio">21 años de trayectoria en desarrollo humano, especialista en formación de personas y andragogía.</p>
+        </div>
+      </div>
+      <p class="affil"><span>ALEJANDRIA STARTUP:</span> incubada y acelerada en <span>OpenBeauchef — FCFM, Universidad de Chile</span>. Certificación en programas de formación para mujeres STEM financiados por <span>CORFO</span>, y en Mentoring de emprendimientos dinámicos por <span>OpenBeauchef</span>. Acompañamiento adicional de <span>Mujeres del Pacífico</span>.</p>
+    </div>
+  </section>
+
+  <!-- ============ MODELO ============ -->
+  <section class="section" id="modelo">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Cómo empezamos</p>
+        <h2>Partimos donde estás — sin pedirte tecnología primero.</h2>
+      </div>
+      <div class="model-grid reveal">
+        <div class="model-card">
+          <div class="model-tag">Etapa 1</div>
+          <h3>Piloto de validación</h3>
+          <ul class="model-list">
+            <li>Diagnóstico en terreno de brechas y riesgos críticos</li>
+            <li>Formación de facilitadores internos</li>
+            <li>Material adaptado a baja escolaridad</li>
+            <li>Primer ciclo medido, con informe para gerencia</li>
+          </ul>
+          <a href="#contacto" class="btn btn-ghost">Cotizar piloto</a>
+        </div>
+        <div class="model-card highlight">
+          <div class="model-tag">Etapa 2</div>
+          <h3>Plataforma AlejandrIA</h3>
+          <ul class="model-list">
+            <li>Suscripción anual por empresa</li>
+            <li>Adaptación de material con IA generativa</li>
+            <li>Tablero de KPI en tiempo real</li>
+            <li>Trazabilidad total, lista para auditoría</li>
+          </ul>
+          <a href="#contacto" class="btn btn-primary">Solicitar demo</a>
+        </div>
+      </div>
+      <p class="res-note" style="margin-top:24px;">Toda contratación comienza con una reunión de diagnóstico sin costo.</p>
+    </div>
+  </section>
+
+  <!-- ============ CTA FINAL ============ -->
+  <section class="final-cta" id="contacto">
+    <div class="wrap">
+      <p class="eyebrow" style="justify-content:center;">Hablemos</p>
+      <h2>Antes del próximo accidente, hay una capacitación que nadie midió.</h2>
+      <p class="lede">Conversemos 30 minutos. Sin costo, sin compromiso — solo un diagnóstico honesto de dónde está la brecha en tu faena.</p>
+      <div class="hero-ctas">
+        <a href="#contacto" class="btn btn-primary">Agendar diagnóstico</a>
+        <a href="#" class="btn btn-ghost">Descargar dossier</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; width:100%;">
+    <span>AlejandrIA · Transferencia que previene</span>
+    <span>Incubada y acelerada en OpenBeauchef — FCFM, Universidad de Chile · CORFO 2026</span>
+  </div>
+</footer>
+
+<script>
+// Reveal on scroll
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:0.15});
+revealEls.forEach(el=>io.observe(el));
+
+// Bar chart fill trigger (separate, since bar-track needs .in for CSS var widths)
+const bars = document.querySelectorAll('.bar-track');
+const barIo = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      barIo.unobserve(e.target);
+    }
+  });
+},{threshold:0.3});
+bars.forEach(el=>barIo.observe(el));
+
+// Active nav link on scroll
+const sections = document.querySelectorAll('main section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const navIo = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    const id = entry.target.getAttribute('id');
+    const link = document.querySelector('.nav-links a[href="#'+id+'"]');
+    if(!link) return;
+    if(entry.isIntersecting){
+      navLinks.forEach(l=>l.classList.remove('active'));
+      link.classList.add('active');
+    }
+  });
+},{rootMargin:'-45% 0px -50% 0px'});
+sections.forEach(s=>navIo.observe(s));
+
+// Mobile nav toggle
+const navToggle = document.getElementById('navToggle');
+const navLinksEl = document.getElementById('navLinks');
+navToggle.addEventListener('click', ()=>{
+  navLinksEl.classList.toggle('open');
+});
+navLinksEl.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click', ()=> navLinksEl.classList.remove('open'));
+});
+</script>
+
+</body>
+</html>
