@@ -1,6 +1,148 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlejandrIA · Transferencia que previene</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --accent: #238636;
+            --accent-hover: #2ea043;
+            --border: #30363d;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.5; padding: 2rem 1rem; }
+        .container { max-width: 900px; margin: 0 auto; }
+        
+        /* Hero */
+        header { text-align: center; padding: 3rem 0 4rem 0; border-bottom: 1px solid var(--border); }
+        .tag { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); font-weight: 700; margin-bottom: 1rem; display: block; }
+        h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1.5rem; line-height: 1.2; }
+        h1 span { color: #58a6ff; }
+        p.subtitle { font-size: 1.15rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 2rem auto; }
+        .cta-btn { display: inline-block; background-color: var(--accent); color: white; padding: 0.8rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: background 0.2s; }
+        .cta-btn:hover { background-color: var(--accent-hover); }
+
+        /* Secciones */
+        section { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+        h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 2rem; text-align: center; }
+
+        /* Bloque 2: Métricas */
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .metric-card { background: var(--card-bg); border: 1px solid var(--border); padding: 2rem; border-radius: 8px; text-align: center; }
+        .metric-card .number { font-size: 2.2rem; font-weight: 800; color: #58a6ff; margin-bottom: 0.5rem; display: block; }
+        .metric-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* Bloque 3: Cómo funciona */
+        .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+        .step-card { background: var(--card-bg); border: 1px solid var(--border); padding: 2rem; border-radius: 8px; }
+        .step-card span { font-size: 0.8rem; font-weight: 700; color: #58a6ff; text-transform: uppercase; display: block; margin-bottom: 0.5rem; }
+        .step-card h3 { font-size: 1.2rem; margin-bottom: 0.8rem; }
+        .step-card p { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Bloque 4: Comparativa */
+        table { width: 100%; border-collapse: collapse; background: var(--card-bg); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+        th, td { padding: 1rem 1.2rem; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.95rem; }
+        th { background: #21262d; font-weight: 600; }
+        tr:last-child td { border-bottom: none; }
+        td:nth-child(2) { color: #58a6ff; font-weight: 600; }
+
+        footer { text-align: center; padding: 3rem 0; color: var(--text-muted); font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Bloque 1: Hero -->
+        <header>
+            <span class="tag">SaaS + IA para Minería y Obras</span>
+            <h1>Firmaron la asistencia.<br><span>Nadie midió si entendieron.</span></h1>
+            <p class="subtitle">Convertimos tus capacitaciones de seguridad en evidencia auditable y conducta verificada en terreno. Menos papel, cero sorpresas en la próxima fiscalización.</p>
+            <a href="mailto:lopez.fuentealba.karina@gmail.com?subject=Agendar%20Diagnostico%20AlejandrIA" class="cta-btn">Agendar Diagnóstico Gratuito</a>
+        </header>
+
+        <!-- Bloque 2: El Diagnóstico en 3 Números -->
+        <section>
+            <h2>El punto ciego de la capacitación en faena</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <span class="number">80%</span>
+                    <p>de los programas no tiene un objetivo de cambio de conducta medible.</p>
+                </div>
+                <div class="metric-card">
+                    <span class="number">100%</span>
+                    <p>evalúa asistencia en sala, pero ignora la transferencia real a la tarea.</p>
+                </div>
+                <div class="metric-card">
+                    <span class="number">0,85M - 6,5M USD</span>
+                    <p>de pérdida evitada al año por empresa al prevenir riesgos críticos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bloque 3: Cómo funciona -->
+        <section>
+            <h2>De la lista de firma a la conducta verificada</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <span>Paso 01</span>
+                    <h3>Diagnóstico e IA</h3>
+                    <p>Ajustamos pautas y guías al perfil real y nivel de escolaridad de tu dotación.</p>
+                </div>
+                <div class="step-card">
+                    <span>Paso 02</span>
+                    <h3>Facilitadores Internos</h3>
+                    <p>Tu jefe de turno transmite el estándar operativo en minutos con guías paso a paso.</p>
+                </div>
+                <div class="step-card">
+                    <span>Paso 03</span>
+                    <h3>Evidencia en Terreno</h3>
+                    <p>Verificación de conducta en el puesto de trabajo con trazabilidad total para auditorías.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bloque 4: La Comparativa -->
+        <section>
+            <h2>Por qué AlejandrIA</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mercado Tradicional</th>
+                        <th>AlejandrIA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Firma de asistencia en sala</td>
+                        <td>Evidencia de conducta firmada en terreno</td>
+                    </tr>
+                    <tr>
+                        <td>Textos densos e iguales para todos</td>
+                        <td>Material adaptado por IA a baja escolaridad</td>
+                    </tr>
+                    <tr>
+                        <td>"Cumplí con el curso"</td>
+                        <td>Reducción del riesgo crítico medido en dólares</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <footer>
+            <p>AlejandrIA · Transferencia que previene | Incubada en OpenBeauchef - Universidad de Chile</p>
+        </footer>
+    </div>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AlejandrIA — previene el riesgo midiendo el impacto real de tus capacitaciones en faena y obra</title>
